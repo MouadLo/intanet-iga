@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="template1"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div layout:fragment="pageContent">
+		<div class="container mt-5 mb-10">
+			<div class="card">
+				<div class="card-header">List des groups</div>
+				<div class="card-body">
+					<form method="get" th:action="@{groups}">
+						<div class="form-group">
+							<lable>Nom</lable>
+							<input th:value="${keyword}" type="text" name="keyword" />
+							<button class="btn btn-primary">Chercher</button>
+						</div>
+					</form>
+					<table class="table">
+						<tr>
+							<th>ID</th>
+							<th>Nom</th>
+						</tr>
+						<tr th:each="g:${groups}">
+							<td th:text="${g.id}"></td>
+							<td th:text="${g.nom}"></td>
+							<td sec:authorize="hasRole('ADMIN')"><a
+								onclick="return confirm('Etes vous sure de vouloir supprimer?')"
+								class="btn btn-danger"
+								th:href="@{deleteGroup(id=${g.id}, keyword=${keyword}, page=${currentPage}, size=${size})}">Delete</a></td>
+							<td sec:authorize="hasRole('ADMIN')"><a class="btn btn-success"
+								th:href="@{editGroup(id=${g.id})}">Edit</a></td>
+						</tr>
+					</table>
+					<ul class="nav nav-pills">
+						<li th:each="page,status:${pages}"><a
+							th:class="${status.index==currentPage} ? 'btn btn-primary' : 'btn'"
+							th:href="@{groups(page=${status.index}, keyword=${keyword}, size=${size} )}"
+							th:text="${status.index}"></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

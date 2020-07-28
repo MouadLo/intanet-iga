@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="template1">
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+</head>
+<body>
+<div layout:fragment="pageContent">
+    <div class="container mt-5">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header" th:if="${mode=='new'}">Formulaire d'ajouter un nouveau
+                    etudiant
+                </div>
+                <div class="card-header" th:if="${mode=='edit'}">Formulaire modifier un nouveau
+                    etudiant
+                </div>
+                <div class="card-body">
+                    <form th:action="@{saveEtudiant}"  method="post">
+                        <div class="form-group">
+                            <label class="control-label">ID</label> <label
+                                class="control-label" th:text="${etudiant.id}"></label> <input
+                                type="hidden" name="id" class="form-control"
+                                th:value="${etudiant.id}"/>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Nom</label> <input type="text"
+                                                                            name="nom" class="form-control"
+                                                                            th:value="${etudiant.nom}"/>
+                            <span class="text-danger" th:errors="${etudiant.nom}"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label">Prenom</label> <input type="text"
+                                                                               name="prenom" class="form-control"
+                                                                               th:value="${etudiant.prenom}"/>
+                            <span class="text-danger" th:errors="${etudiant.prenom}"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label">Adresse</label> <input type="text"
+                                                                               name="adresse" class="form-control"
+                                                                               th:value="${etudiant.adresse}"/>
+                            <span class="text-danger" th:errors="${etudiant.adresse}"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label">Mail</label> <input type="text"
+                                                                                name="mail" class="form-control"
+                                                                                th:value="${etudiant.mail}"/>
+                            <span class="text-danger" th:errors="${etudiant.mail}"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Group</label>
+                            <select th:field="*{groups}" class="form-control" name="group" id="group">
+                                <option th:each="group : ${groups}" th:value="${group}"  th:utext="${group.nom}"></option>
+                            </select>
+                            <span class="text-danger" th:errors="${etudiant.group}"></span>
+                        </div>
+
+                        <button class="btn btn-success" type="submit">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorator="template1">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div layout:fragment="pageContent">
+		<div class="container mt-5 mb-10">
+			<div>
+				<div class="card">
+					<div class="card-header">Enregistrement effectué</div>
+					<div class="card-body">
+						<div class="form-group">
+							<label>ID: </label>
+							<strong><label class="text-bold" th:text="${etudiant.id}"></label></strong>
+						</div>
+						<div class="form-group">
+							<label>Nom: </label>
+							<strong><label th:text="${etudiant.nom}"></label></strong>
+						</div>
+
+						<div class="form-group">
+							<label>Prenom: </label>
+							<strong><label th:text="${etudiant.prenom}"></label></strong>
+						</div>
+
+						<div class="form-group">
+							<label>Adresse: </label>
+							<strong><label th:text="${etudiant.adresse}"></label></strong>
+						</div>
+
+						<div class="form-group">
+							<label>Mail: </label>
+							<strong><label th:text="${etudiant.mail}"></label></strong>
+						</div>
+
+						<div class="form-group">
+							<label>Group: </label>
+							<strong><label th:text="${etudiant.group}"></label></strong>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
