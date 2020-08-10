@@ -37,7 +37,7 @@ public class Etudiant {
     private String mail;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "groups_id", referencedColumnName = "id")
     private Group group;
 

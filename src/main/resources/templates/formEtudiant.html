@@ -18,7 +18,7 @@
                     etudiant
                 </div>
                 <div class="card-body">
-                    <form th:action="@{saveEtudiant}"  method="post">
+                    <form th:action="@{saveEtudiant}" th:object="${etudiant}" method="post">
                         <div class="form-group">
                             <label class="control-label">ID</label> <label
                                 class="control-label" th:text="${etudiant.id}"></label> <input
@@ -56,8 +56,8 @@
 
                         <div class="form-group">
                             <label>Group</label>
-                            <select th:field="*{groups}" class="form-control" name="group" id="group">
-                                <option th:each="group : ${groups}" th:value="${group}"  th:utext="${group.nom}"></option>
+                            <select  class="form-control" th:object="${group}" name="group" id="group">
+                                <option th:each="group : ${groups}" th:value="${group}" th:utext="${group.nom}"></option>
                             </select>
                             <span class="text-danger" th:errors="${etudiant.group}"></span>
                         </div>

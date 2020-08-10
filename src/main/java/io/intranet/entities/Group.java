@@ -8,6 +8,7 @@ import lombok.ToString;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Data
@@ -23,5 +24,8 @@ public class Group {
     @NotNull
     @Size(min = 5, max = 15, message= "Nom incorect")
     private String nom;
+
+    @OneToMany(mappedBy = "group")
+    private List<Etudiant> etudiants;
 
 }

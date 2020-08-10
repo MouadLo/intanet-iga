@@ -45,14 +45,14 @@ public class groupController {
     }
 
     @GetMapping(path = "formGroup")
-    public String formPatient(Model model) {
+    public String formGroup(Model model) {
         model.addAttribute("group", new Group());
         model.addAttribute("mode", "new");
         return "formGroup";
     }
 
     @PostMapping(path = "saveGroup")
-    public String savePatient(Model model, @Valid Group group, BindingResult bindingResult) {
+    public String saveGroup(Model model, @Valid Group group, BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "formGroup";
         groupRepository.save(group);
@@ -61,7 +61,7 @@ public class groupController {
     }
 
     @GetMapping(path = "editGroup")
-    public String editPatient(Model model, Long id) {
+    public String editGroup(Model model, Long id) {
         Group g = groupRepository.findById(id).get();
         model.addAttribute("group", g);
         model.addAttribute("mode", "edit");

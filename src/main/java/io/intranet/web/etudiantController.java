@@ -46,21 +46,23 @@ public class etudiantController {
     }
 
     @GetMapping(path = "formEtudiant")
-    public String formPatient(Model model) {
+    public String formEtudiant(Model model) {
 
         List<Group> listGroup = groupRepository.findAll();
+        Etudiant etudiant = new Etudiant();
         System.out.println(listGroup);
         model.addAttribute("groups", listGroup);
-        model.addAttribute("etudiant", new Etudiant());
+        model.addAttribute("etudiant", etudiant);
         model.addAttribute("mode", "new");
         return "formEtudiant";
     }
 
     @PostMapping(path = "saveEtudiant")
-    public String savePatient(Model model, @Valid Etudiant etudiant, BindingResult bindingResult) {
+    public String saveEtudiant(Model model, @Valid Etudiant etudiant, BindingResult bindingResult) {
         if (bindingResult.hasErrors()){
             List<Group> listGroup = groupRepository.findAll();
             model.addAttribute("groups", listGroup);
+            System.out.println(etudiant);
             return "formEtudiant";
         }
 
@@ -71,7 +73,7 @@ public class etudiantController {
     }
 
     @GetMapping(path = "editEtudiant")
-    public String editPatient(Model model, Long id) {
+    public String editEtudiant(Model model, Long id) {
         Etudiant e = etudiantRepository.findById(id).get();
         model.addAttribute("group", e);
         model.addAttribute("mode", "edit");
